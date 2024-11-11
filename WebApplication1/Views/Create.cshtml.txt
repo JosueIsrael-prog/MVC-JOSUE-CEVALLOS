@@ -1,4 +1,4 @@
-﻿@model Taller1JoséMiguelVásconez.Models.Equipo
+﻿@model Taller1JosueCevallos.Models.Equipo
 
 @{
     ViewData["Title"] = "Create";
