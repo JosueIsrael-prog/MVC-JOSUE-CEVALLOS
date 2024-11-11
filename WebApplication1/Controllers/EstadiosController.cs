@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Taller1JoséMiguelVásconez.Models;
 
-namespace Taller1JoséMiguelVásconez.Controllers
+namespace Taller1JosueCevallos.Controllers
 {
     public class EstadiosController : Controller
     {
