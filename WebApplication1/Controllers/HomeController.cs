@@ -1,34 +1,11 @@
-using System;
-using System.IO;
-
-namespace CevallosJosueExamenP2
-{
-    public partial class RecargaTelefonicaPage : ContentPage
-    {
-        public RecargaTelefonicaPage()
-        {
-            InitializeComponent();
-        }
-
-        private async void OnRecargarClicked(object sender, EventArgs e)
-        {
-            string numero = NumeroTelefono.Text;
-            string nombre = NombreUsuario.Text;
-
-            if (string.IsNullOrWhiteSpace(numero) || string.IsNullOrWhiteSpace(nombre))
-            {
-                await DisplayAlert("Error", "Todos los campos son obligatorios.", "OK");
-                return;
-            }
-
-            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RecargaDatos.txt");
-            File.WriteAllText(filePath, $"Nombre: {nombre}\nNúmero: {numero}");
-
-            await DisplayAlert("Éxito", "La recarga fue exitosa.", "OK");
-            UltimaRecargaLabel.Text = $"Última recarga:\nNombre: {nombre}\nNúmero: {numero}";
-
-            NumeroTelefono.Text = string.Empty;
-            NombreUsuario.Text = string.Empty;
-        }
-    }
-}
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CevallosJosueExamenP2.DatosPersonalesPage"
+             Title="Datos personales">
+    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+        <Label Text="Primer Nombre" Grid.Row="0" Grid.Column="0" />
+        <Label Text="Segundo Nombre" Grid.Row="0" Grid.Column="1" />
+        <Label Text="Primer Apellido" Grid.Row="1" Grid.Column="0" Style="{StaticResource ApellidoStyle}" />
+        <Label Text="Segundo Apellido" Grid.Row="1" Grid.Column="1" Style="{StaticResource ApellidoStyle}" />
+    </Grid>
+</ContentPage>
