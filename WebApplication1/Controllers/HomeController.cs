@@ -1,11 +1,18 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CevallosJosueExamenP2.DatosPersonalesPage"
-             Title="Datos personales">
-    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
-        <Label Text="Primer Nombre" Grid.Row="0" Grid.Column="0" />
-        <Label Text="Segundo Nombre" Grid.Row="0" Grid.Column="1" />
-        <Label Text="Primer Apellido" Grid.Row="1" Grid.Column="0" Style="{StaticResource ApellidoStyle}" />
-        <Label Text="Segundo Apellido" Grid.Row="1" Grid.Column="1" Style="{StaticResource ApellidoStyle}" />
-    </Grid>
-</ContentPage>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:CevallosJosueExamenP2"
+       x:Class="CevallosJosueExamenP2.AppShell"
+       Title="CevallosJosueExamenP2">
+
+    <TabBar>
+        <!-- Pestaña para Recarga -->
+        <Tab Title="Recarga" Icon="icon_recarga.png">
+            <ShellContent ContentTemplate="{DataTemplate local:RecargaTelefonicaPage}" />
+        </Tab>
+
+        <!-- Pestaña para Datos Personales -->
+        <Tab Title="Datos" Icon="icon_datos.png">
+            <ShellContent ContentTemplate="{DataTemplate local:DatosPersonalesPage}" />
+        </Tab>
+    </TabBar>
+</Shell>
