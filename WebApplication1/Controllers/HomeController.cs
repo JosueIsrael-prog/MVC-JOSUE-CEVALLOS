@@ -1,32 +1,34 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using WebApplication1.Models;
+using System;
+using System.IO;
 
-namespace WebApplication1.Controllers
+namespace CevallosJosueExamenP2
 {
-    public class HomeController : Controller
+    public partial class RecargaTelefonicaPage : ContentPage
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public RecargaTelefonicaPage()
         {
-            _logger = logger;
+            InitializeComponent();
         }
 
-        public IActionResult Index()
+        private async void OnRecargarClicked(object sender, EventArgs e)
         {
-            return View();
-        }
+            string numero = NumeroTelefono.Text;
+            string nombre = NombreUsuario.Text;
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            if (string.IsNullOrWhiteSpace(numero) || string.IsNullOrWhiteSpace(nombre))
+            {
+                await DisplayAlert("Error", "Todos los campos son obligatorios.", "OK");
+                return;
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RecargaDatos.txt");
+            File.WriteAllText(filePath, $"Nombre: {nombre}\nNúmero: {numero}");
+
+            await DisplayAlert("Éxito", "La recarga fue exitosa.", "OK");
+            UltimaRecargaLabel.Text = $"Última recarga:\nNombre: {nombre}\nNúmero: {numero}";
+
+            NumeroTelefono.Text = string.Empty;
+            NombreUsuario.Text = string.Empty;
         }
     }
 }
