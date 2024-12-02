@@ -1,15 +1,12 @@
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:CevallosJosueExamenP2"
-       x:Class="CevallosJosueExamenP2.AppShell"
-       Title="CevallosJosueExamenP2">
-
-    <TabBar>
-        <Tab Title="Recarga" Icon="icon_recarga.png">
-            <ShellContent ContentTemplate="{DataTemplate local:RecargaTelefonicaPage}" />
-        </Tab>
-        <Tab Title="Datos" Icon="icon_datos.png">
-            <ShellContent ContentTemplate="{DataTemplate local:DatosPersonalesPage}" />
-        </Tab>
-    </TabBar>
-</Shell>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CevallosJosueExamenP2.RecargaTelefonicaPage"
+             Title="Recarga telefónica">
+    <StackLayout Padding="20">
+        <Label Text="Recarga telefónica" FontSize="24" HorizontalOptions="Center" />
+        <Entry x:Name="NumeroTelefono" Placeholder="Número de teléfono" />
+        <Entry x:Name="NombreUsuario" Placeholder="Nombre de quien realiza la recarga" />
+        <Button Text="Recargar" Clicked="OnRecargarClicked" />
+        <Label x:Name="UltimaRecargaLabel" Text="Última recarga realizada:" Margin="0,20,0,0" />
+    </StackLayout>
+</ContentPage>
