@@ -1,29 +1,24 @@
-using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JCevallls.MainPage"
+             xmlns:vm="clr-namespace:JCevallls.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:CountriesViewModel />
+    </ContentPage.BindingContext>
 
-public class CountriesViewModel
-{
-    public ObservableCollection<Country> Countries { get; } = new ObservableCollection<Country>();
-    HttpClient client = new HttpClient();
-
-    public async Task SearchCountry(string name)
-    {
-        var response = await client.GetAsync($"https://restcountries.com/v3.1/name/{name}?fields=name,region,maps");
-        if (response.IsSuccessStatusCode)
-        {
-            var json = await response.Content.ReadAsStringAsync();
-            var countries = JsonConvert.DeserializeObject<List<Country>>(json); // Adaptar a la estructura exacta de la respuesta
-            Countries.Clear();
-            foreach (var country in countries)
-            {
-                Countries.Add(country);
-            }
-        }
-        else
-        {
-            // Manejar el error
-        }
-    }
-}
+    <VerticalStackLayout>
+        <SearchBar Placeholder="Enter country name"
+                   SearchCommand="{Binding SearchCountryCommand}"
+                   SearchCommandParameter="{Binding Text, Source={RelativeSource Self}}"/>
+        <Button Text="Search"
+                Command="{Binding SearchCountryCommand}"
+                CommandParameter="{Binding Text, Source={RelativeSource Self}}"/>
+        <ListView ItemsSource="{Binding Countries}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding CommonName}" Detail="{Binding Region}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
